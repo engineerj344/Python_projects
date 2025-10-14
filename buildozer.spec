@@ -1,15 +1,37 @@
-[app]
-title = Expense Tracker
-package.name = expensetracker
-package.domain = org.example
+name: Build APK
 
-source.dir = .
-source.include_exts = py,png,jpg,kv,atlas,ttf
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
 
-version = 1.0
-requirements = python3,kivy==2.3.1,kivymd==1.1.1
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-android.permissions = WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v3
 
-[buildozer]
-log_level = 2
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y python3-pip python3-setuptools git zip unzip openjdk-17-jdk python3-virtualenv
+        pip install --upgrade pip
+        pip install buildozer
+
+    - name: Build APK
+      run: |
+        buildozer android debug
+
+    - name: Upload APK Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: expense-tracker.apk
+        path: bin/*.apk
+        retention-days: 7
