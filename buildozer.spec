@@ -10,7 +10,7 @@ source.include_exts = py,png,jpg,kv,atlas
 version = 0.1
 
 # Include KivyMD in the requirements
-requirements = python3,kivy,kivymd
+requirements = python3,kivy
 
 orientation = portrait
 fullscreen = 0
