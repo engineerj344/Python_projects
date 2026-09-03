@@ -3,11 +3,11 @@ name: Build Kivy APK
 on:
   push:
     branches: [ main ]
-  workflow_dispatch:   # You can also run it manually
+  workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04   # More stable for Buildozer
+    runs-on: ubuntu-22.04
 
     steps:
     - name: Checkout repository
