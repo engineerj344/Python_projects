@@ -9,12 +9,14 @@ source.include_exts = py,png,jpg,kv,atlas
 
 version = 0.1
 
-requirements = python3,kivy
+# Include KivyMD in the requirements
+requirements = python3,kivy,kivymd
 
 orientation = portrait
 fullscreen = 0
 
 android.accept_sdk_license = True
+android.arch = armeabi-v7a
 
 [buildozer]
 
